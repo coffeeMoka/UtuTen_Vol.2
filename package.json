@@ -1,0 +1,32 @@
+{
+  "name": "ututen_vol.2",
+  "version": "1.0.0",
+  "description": "UtuTen_Vol.2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.dev.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coffeeMoka/UtuTen_Vol.2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coffeeMoka/UtuTen_Vol.2/issues"
+  },
+  "homepage": "https://github.com/coffeeMoka/UtuTen_Vol.2#readme",
+  "devDependencies": {
+    "ts-loader": "^6.0.2",
+    "typescript": "^3.5.1",
+    "webpack": "^4.33.0",
+    "webpack-cli": "^3.3.4"
+  },
+  "dependencies": {
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
