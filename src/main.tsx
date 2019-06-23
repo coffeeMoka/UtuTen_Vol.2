@@ -20,6 +20,14 @@ class ConvertEra extends React.Component<EraProps, EraState> {
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
+    ceToJe(value: string): string {
+        const ce = this.stringToCe(value);
+        return ce.toString();
+    }
+    stringToCe(value: string): number {
+        const ceString = value.split('/').join('');
+        return parseInt(ceString);
+    }
     handleChange(event: React.FormEvent<HTMLInputElement>): void {
         this.setState({
             inputValue: event.currentTarget.value
@@ -29,8 +37,11 @@ class ConvertEra extends React.Component<EraProps, EraState> {
         const reg = /[1,2][0,8,9]\d{2}\/[0,1]\d{1}\/[0,1,2,3]\d{1}/;
         if(!reg.test(this.state.inputValue)) 
             this.setState({ outputValue: "1800年以降の西暦を入力してください！" });
-        else
-        this.setState({ outputValue: "とりあえず西暦！" });
+        else {
+            const je = this.ceToJe(this.state.inputValue);
+            console.log(je);
+            this.setState({ outputValue: "とりあえず西暦！" });
+        }
     }
     render(): JSX.Element {
         return(
