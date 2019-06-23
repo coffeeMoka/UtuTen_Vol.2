@@ -77,19 +77,18 @@ class ConvertEra extends React.Component<EraProps, EraState> {
         });
     }
     handleClick(): void {
-        const reg = /[1,2][0,8,9]\d{2}\/[0,1]\d{1}\/[0,1,2,3]\d{1}/;
+        const reg = /([1,2][0,8,9]\d{2}\/[0,1]\d{1}\/[0,1,2,3]\d{1})|([1,2][0,8,9]\d{2}[0,1]\d{1}[0,1,2,3]\d{1})/;
         if(!reg.test(this.state.inputValue)) 
             this.setState({ outputValue: "1800年以降の西暦を入力してください！" });
         else {
             const je = this.ceToJe(this.state.inputValue);
-            console.log(je);
             this.setState({ outputValue: je });
         }
     }
     render(): JSX.Element {
         return(
         <div>
-            <Input name={this.state.inputValue} handleChange={this.handleChange} />
+            <Input name={this.state.inputValue} idName={this.idName} handleChange={this.handleChange} />
             <Button handleClick={this.handleClick} />
             <Output outputEra={this.state.outputValue} />
         </div>);
@@ -98,19 +97,23 @@ class ConvertEra extends React.Component<EraProps, EraState> {
 
 interface InputProps {
     name: string;
+    idName: string;
     handleChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const Input: React.SFC<InputProps> = props => {
-    const { name, handleChange } : InputProps = props;
+    const { name, idName, handleChange } : InputProps = props;
     return (
-        <input 
-            type="text" 
-            placeholder="yyyy/MM/dd" 
-            id="convertEra" 
-            value={name} 
-            onChange={handleChange} 
-         />
+        <p>
+            <label htmlFor={idName}>西暦(yyyy/MM/dd または yyyyMMdd表記)</label>
+            <br />
+            <input 
+                type="text"  
+                id={idName} 
+                value={name} 
+                onChange={handleChange} 
+            />
+         </p>
     )
 }
 
@@ -120,7 +123,11 @@ interface ButtonProps {
 
 const Button: React.SFC<ButtonProps> = props => {
     const { handleClick }: ButtonProps = props;
-    return <button onClick={handleClick}>Convert Era to Japanese</button>
+    return (
+        <p>
+            <button onClick={handleClick}>Convert Era to Japanese</button>
+        </p>
+    );
 }
 
 interface OutputProps {
