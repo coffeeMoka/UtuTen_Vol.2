@@ -10,6 +10,7 @@ interface EraState {
 }
 
 class ConvertEra extends React.Component<EraProps, EraState> {
+    idName  = "convertEra";
     constructor(props: EraProps) {
         super(props);
         this.state = {
@@ -25,7 +26,11 @@ class ConvertEra extends React.Component<EraProps, EraState> {
         });
     }
     handleClick(): void {
-
+        const reg = /[1,2][0,8,9]\d{2}\/[0,1]\d{1}\/[0,1,2,3]\d{1}/;
+        if(!reg.test(this.state.inputValue)) 
+            this.setState({ outputValue: "1800年以降の西暦を入力してください！" });
+        else
+        this.setState({ outputValue: "とりあえず西暦！" });
     }
     render(): JSX.Element {
         return(
@@ -45,7 +50,13 @@ interface InputProps {
 const Input: React.SFC<InputProps> = props => {
     const { name, handleChange } : InputProps = props;
     return (
-        <input type="text" placeholder="yyyy/MM/dd" value={name} onChange={handleChange} pattern="[1,2][0,8,9]\d{2}\/[0,1]\d{1}\/[0,1,2,3]\d{1}" title="1999/01/31 のように入力してください( / 必須 )" />
+        <input 
+            type="text" 
+            placeholder="yyyy/MM/dd" 
+            id="convertEra" 
+            value={name} 
+            onChange={handleChange} 
+         />
     )
 }
 
